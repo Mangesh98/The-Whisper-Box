@@ -21,7 +21,6 @@ export async function POST(request: Request) {
 		// validate with zod
 		// const usernameResult = UsernameQuerySchema.safeParse(queryParams);
 		// const codeResult = codeVerifyQuerySchema.safeParse(queryParams);
-		
 
 		// if (!usernameResult.success) {
 		// 	const usernameErrors =
@@ -56,6 +55,7 @@ export async function POST(request: Request) {
 		const user = await UserModel.findOne({
 			username,
 		});
+		
 
 		if (!user) {
 			return Response.json(
@@ -67,16 +67,19 @@ export async function POST(request: Request) {
 			);
 		}
 
-		const isCodeValid = user.verifyCode === code.code;
+		const isCodeValid = user.verifyCode === code;
 		const isCodeNotExpired = new Date(user.verifyCodeExpiry) > new Date();
 
 		if (isCodeValid && isCodeNotExpired) {
 			user.isVerified = true;
 			await user.save();
-			return Response.json({
-				success: true,
-				message: "User verified successfully.",
-			});
+			return Response.json(
+				{
+					success: true,
+					message: "User verified successfully.",
+				},
+				{ status: 200 }
+			);
 		} else if (!isCodeNotExpired) {
 			return Response.json(
 				{
@@ -86,10 +89,13 @@ export async function POST(request: Request) {
 				{ status: 400 }
 			);
 		} else {
-			return Response.json({
-				success: false,
-				message: "Invalid Code. Please check the code and try again.",
-			});
+			return Response.json(
+				{
+					success: false,
+					message: "Invalid Code. Please check the code and try again.",
+				},
+				{ status: 400 }
+			);
 		}
 	} catch (error) {
 		console.error("Error Verifying User. ", error);

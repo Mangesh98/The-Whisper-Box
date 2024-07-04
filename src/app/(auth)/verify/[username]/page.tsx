@@ -34,11 +34,21 @@ const VerifyAccount = () => {
 				username: params.username,
 				code: data.code,
 			});
-			toast({
-				title: "Success",
-				description: response.data.message,
-			});
-			router.replace("/sign-in");
+			// console.log(response.statusText, response.status);
+
+			if (response.status === 200) {
+				toast({
+					title: "Success",
+					description: response.data.message,
+				});
+				router.replace("/sign-in");
+			} else {
+				toast({
+					title: "Error",
+					description: response.data.message,
+					variant: "destructive",
+				});
+			}
 		} catch (error) {
 			console.error("Error in verify account: ", error);
 			const axiosError = error as AxiosError<ApiResponse>;
