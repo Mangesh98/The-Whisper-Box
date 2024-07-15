@@ -8,6 +8,7 @@ The-Whisper-Box is a platform designed to collect anonymous feedback. It allows 
 - **Anonymous Feedback**: Users can receive anonymous feedback through a unique link.
 - **Dashboard**: View all your anonymous feedback in one place. Copy your unique link to share with others.
 - **Feedback Acceptance**: Toggle a switch to accept or stop receiving anonymous feedback.
+- **Public Link Page**: Anyone can send anonymous feedback to the user via the public link without creating an account.
 - **ChatGPT Integration**: Generate feedback using OpenAI's ChatGPT.
 
 ## Technologies Used
