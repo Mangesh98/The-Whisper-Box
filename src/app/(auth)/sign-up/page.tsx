@@ -91,7 +91,7 @@ const page = () => {
 
 	return (
 		<>
-			<div className="flex justify-center items-center max-h-screen bg-gray-100">
+			<div className="flex justify-center items-center min-h-screen bg-white">
 				<div className="w-full max-w-md p-8 space-y-8 bg-white rounded-lg shadow-md">
 					<div className="text-center">
 						<h1 className="text-4xl font-extrabold tracking-tight lg:text-5xl mb-6">
@@ -100,7 +100,10 @@ const page = () => {
 						<p className="mb-4">Sign up to start your anonymous adventure</p>
 					</div>
 					<Form {...form}>
-						<form onSubmit={form.handleSubmit(onSubmit)}>
+						<form
+							onSubmit={form.handleSubmit(onSubmit)}
+							className="max-w-sm mx-auto"
+						>
 							<div className="space-y-6">
 								<FormField
 									control={form.control}
@@ -164,7 +167,7 @@ const page = () => {
 										</FormItem>
 									)}
 								/>
-								<Button type="submit" disabled={isSubmitting}>
+								<Button className="w-full" type="submit" disabled={isSubmitting}>
 									{isSubmitting ? (
 										<>
 											<Loader2 className="mr-2 h-4 w-4 animate-spin" /> Please
